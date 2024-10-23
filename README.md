@@ -54,8 +54,7 @@ Here is an example of the output when running the script:
 Here is a list of potential improvements for the project:
 
 - [ ] Add more services (e.g., Wireshark, Burp Suite, etc.)
-- [ ] Improve documentation and user experience
-- [ ] Add more detailed instructions for setting up the environment
+- [ ] Improve documentation and user experience.
 - [ ] Firewall Integration: Implement a firewall to enhance security.
 - [ ] Network Segmentation: Divide the environment into separate networks for better isolation.
 - [ ] Logging and Monitoring: Implement logging and monitoring tools to track activity and detect anomalies.
