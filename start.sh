@@ -1,29 +1,53 @@
 #!/bin/bash
 
-# Start the containers
-echo -e "\n🚀 Starting the Pen-Test Lab...\n"
-docker-compose up -d
+# Clear the terminal
+clear
 
-# Display a message and wait for a fixed delay
-echo -e "\n🔨 Building the hacking environment, please wait...\n"
-sleep 30  # Delay for 30 seconds to ensure services are fully up
+# Define colors
+GREEN="\033[0;32m"
+YELLOW="\033[1;33m"
+BLUE="\033[1;34m"
+CYAN="\033[1;36m"
+RED="\033[1;31m"
+NC="\033[0m" # No Color
 
-# Check the status of the containers and ensure they are running
-function check_services() {
-  STATUS=$(docker ps --filter "status=running" --filter "name=meta2|metasploitable|kali-linux-new" -q | wc -l)
-  if [[ $STATUS -eq 3 ]]; then
-    echo -e "✅ All services are up and running!"
-  else
-    echo -e "⚠️ Some services may not be fully ready. Please check manually."
-  fi
+# Function to display messages
+display_message() {
+    echo -e "${CYAN}---------------------------------------------------${NC}"
+    echo -e "${GREEN}$1${NC}"
+    echo -e "${CYAN}---------------------------------------------------${NC}"
 }
 
-# Call the function to check services
-check_services
+# Start the environment
+display_message "🚀 Starting the Pen Test Lab Environment..."
 
-# Display the addresses
-echo -e "\n🔗 Lab Environment is Ready! You can now access the following services:\n"
-echo -e "🔹 Kali Linux: \033[1;34mhttp://localhost:3000/\033[0m"
-echo -e "🔹 Damn Vulnerable Web App: \033[1;34mhttp://localhost:8081/login.php\033[0m"
-echo -e "🔹 Metasploitable2: \033[1;34mhttp://localhost/\033[0m\n"
-echo -e "✨ Happy Hacking! 🧑‍💻"
+# Check if the Docker network already exists
+if docker network ls | grep -q "pen-test-lab_net"; then
+    display_message "🔍 Found network: pen-test-lab_net. Connected to network: pen-test-lab_net."
+else
+    display_message "🐳 Creating Docker network: pen-test-lab_net..."
+    docker network create pen-test-lab_net
+fi
+
+# Start Docker containers
+docker-compose up -d
+
+# Check if Docker Compose was successful
+if [ $? -eq 0 ]; then
+    # Display loading message
+    display_message "⏳ Building the hacking environment... Please wait!"
+
+    # Delay for loading (30 seconds)
+    sleep 30
+
+    # Display accessible links
+    echo -e "${YELLOW}📌 Access your services at:${NC}"
+    echo -e "${BLUE}Kali Linux: ${GREEN}http://localhost:3000/${NC}"
+    echo -e "${BLUE}Damn Vulnerable Web Application: ${GREEN}http://localhost:8081/login.php${NC}"
+    echo -e "${BLUE}Metasploitable2: ${GREEN}http://localhost/${NC}"
+
+    # Final message
+    display_message "✅ Environment is up and running! Enjoy your testing!"
+else
+    echo -e "${RED}❌ Failed to start the environment. Please check the logs for more details.${NC}"
+fi
