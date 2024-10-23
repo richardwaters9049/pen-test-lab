@@ -45,4 +45,6 @@ cd pen-test-lab
 
 ### Output
 
+Here is an example of the output when running the script:
+
 ![Running Containers](images/run-contain.png)
