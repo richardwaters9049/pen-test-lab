@@ -6,7 +6,7 @@ docker-compose up -d
 
 # Display a message and wait for a fixed delay
 echo -e "\n🔨 Building the hacking environment, please wait...\n"
-sleep 30  # Delay for 40 seconds to ensure services are fully up
+sleep 30  # Delay for 30 seconds to ensure services are fully up
 
 # Check the status of the containers and ensure they are running
 function check_services() {
