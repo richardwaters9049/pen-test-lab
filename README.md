@@ -1,4 +1,4 @@
-# 🚀 Pen Test Lab - Easily Deployable Pentesting Environment
+# 🐳 Pen Test Lab - Docker Pentesting Enviroment
 
 Welcome to **Pen Test Lab** – an easily deployable pentesting environment leveraging Docker containers. This project provides an accessible, pre-configured environment with **Kali Linux**, **Damn Vulnerable Web Application (DVWA)**, and **Metasploitable2**, running through your browser for easy testing and learning.
 
