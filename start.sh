@@ -19,11 +19,11 @@ display_message() {
 }
 
 # Start the environment
-display_message "🚀 Starting the Pen Test Lab Environment..."
+display_message "🐳 Starting the Pen Test Lab Environment..."
 
 # Check if the Docker network already exists
 if docker network ls | grep -q "pen-test-lab_net"; then
-    display_message "🔍 Found network: pen-test-lab_net. Connected to network: pen-test-lab_net."
+    display_message "🛜 Connected to network: pen-test-lab_net."
 else
     display_message "🐳 Creating Docker network: pen-test-lab_net..."
     docker network create pen-test-lab_net
@@ -41,13 +41,14 @@ if [ $? -eq 0 ]; then
     sleep 30
 
     # Display accessible links
-    echo -e "${YELLOW}📌 Access your services at:${NC}"
+    echo -e "${YELLOW}🔗 Access your services at:${NC}"
+
     echo -e "${BLUE}Kali Linux: ${GREEN}http://localhost:3000/${NC}"
     echo -e "${BLUE}Damn Vulnerable Web Application: ${GREEN}http://localhost:8081/login.php${NC}"
     echo -e "${BLUE}Metasploitable2: ${GREEN}http://localhost/${NC}"
 
     # Final message
-    display_message "✅ Environment is up and running! Enjoy your testing!"
+    display_message "✅ Environment is up and running, Happy hacking!!! 🧑‍💻"
 else
     echo -e "${RED}❌ Failed to start the environment. Please check the logs for more details.${NC}"
 fi
