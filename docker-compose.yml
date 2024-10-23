@@ -1,0 +1,42 @@
+# version: '3.8'
+
+services:
+  kali-linux:
+    image: lscr.io/linuxserver/kali-linux:latest
+    container_name: kali-linux-new
+    platform: linux/amd64 # Specify the platform
+    security_opt:
+      - seccomp:unconfined # optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - SUBFOLDER=/ # optional
+      - "TITLE=Kali Linux" # optional
+    volumes:
+      - ./config:/config
+      - /var/run/docker.sock:/var/run/docker.sock # optional
+    ports:
+      - 3000:3000
+      - 3001:3001
+    shm_size: "1gb" # optional
+    restart: unless-stopped
+
+  metasploitable:
+    image: lapsiufcg/metasploitable2:latest
+    container_name: metasploitable
+    platform: linux/amd64 # Specify the platform
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+      - 2222:22
+    restart: unless-stopped
+
+  meta2:
+    image: vulnerables/web-dvwa
+    container_name: meta2
+    platform: linux/amd64 # Specify the platform
+    ports:
+      - 8081:80
+    restart: unless-stopped
