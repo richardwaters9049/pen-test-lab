@@ -47,7 +47,7 @@ cd pen-test-lab
 
 Here is an example of the output when running the script:
 
-![Running Containers](images/run-contain.png)
+![Running Containers](images/terminal.png)
 
 ## Future Improvements
 
